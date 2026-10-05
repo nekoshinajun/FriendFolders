@@ -11,19 +11,18 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install ps2exe
-        shell: powershell
-        run: Install-Module ps2exe -Force -Scope CurrentUser
-      - name: Build installer
-        shell: powershell
-        run: Invoke-ps2exe installer/FriendFolders-Setup.ps1 FriendFolders-Setup.exe -title "FriendFolders Setup" -product "FriendFolders" -company "nekoshinajun" -version "1.0.0" -noConsole
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Build native installer
+        run: dotnet publish installer/FriendFoldersSetup.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: FriendFolders-Setup
-          path: FriendFolders-Setup.exe
+          path: publish/FriendFolders-Setup.exe
       - name: Attach installer to release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: FriendFolders-Setup.exe
+          files: publish/FriendFolders-Setup.exe
