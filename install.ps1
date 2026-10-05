@@ -27,7 +27,7 @@ try {
 
     if (-not (Get-Command pnpm -ErrorAction SilentlyContinue)) {
         Step "Installing pnpm"
-        npm install -g pnpm
+        npm.cmd install -g pnpm
         $env:Path = [Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [Environment]::GetEnvironmentVariable("Path","User")
     }
 
@@ -42,7 +42,7 @@ try {
 
     Step "Installing Vencord dependencies"
     Push-Location $vencord
-    pnpm install --frozen-lockfile
+    pnpm.cmd install --frozen-lockfile
 
     $plugins = Join-Path $vencord "src\userplugins"
     New-Item -ItemType Directory -Force -Path $plugins | Out-Null
@@ -65,11 +65,11 @@ try {
     }
 
     Step "Building Vencord"
-    pnpm build
+    pnpm.cmd build
 
     Step "Opening Vencord installer"
     Write-Host "Select your Discord installation (normally Stable) when prompted." -ForegroundColor Yellow
-    pnpm inject
+    pnpm.cmd inject
 
     Pop-Location
     Write-Host ""
