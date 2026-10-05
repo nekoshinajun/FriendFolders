@@ -1,33 +1,60 @@
 # FriendFolders
 
-A [Vencord](https://vencord.dev) userplugin for organizing Discord friends into custom folders.
+**Discordのフレンドを、好きなフォルダに整理できるVencord用プラグインです。**
 
-## Features
+> [!IMPORTANT]
+> ## 🚀 Windows かんたんインストール
+>
+> **ファイルを手動でダウンロードする必要はありません。**
+>
+> ### 1. PowerShellを開く
+> Windowsの検索で **PowerShell** と入力し、**Windows PowerShell** を開きます。  
+> 管理者として開く必要はありません。
+>
+> ### 2. 下の1行をコピー
+>
+> ```powershell
+> irm https://raw.githubusercontent.com/nekoshinajun/FriendFolders/main/install.ps1 | iex
+> ```
+>
+> コード右上の **コピーボタン** を押せばOKです。
+>
+> ### 3. PowerShellに貼り付けて Enter
+> 必要なデータを自動でダウンロードし、FriendFoldersをセットアップします。
+>
+> ### 4. Vencordの選択画面が出たら Stable を選択
+> 通常版Discordを使っている場合は **Stable** を選んで Enter を押します。
+>
+> ### 5. Discordを完全終了して再起動
+> **ユーザー設定 → Vencord → Plugins → FriendFolders** をONにしたら完了です。
+>
+> **更新するときも、同じ1行をもう一度実行するだけです。**
 
-- Adds a folder tab to the Friends page
-- Add friends to folders from the user context menu
-- A friend can belong to multiple folders
-- Data stays local in IndexedDB
-- Does not modify Discord relationships or transmit folder data externally
+---
 
-## Install (Windows)
+## できること
 
-> **A public EXE installer is not currently distributed.**
-> Unsigned executables can be blocked by Windows Smart App Control. You do not need to disable Smart App Control.
+- フレンド画面に「フォルダ」タブを追加
+- フレンドを右クリックして好きなフォルダへ追加
+- 「仕事」「VTuber」「ゲーム友達」など自由に分類
+- 1人を複数のフォルダに登録可能
+- フォルダごとにフレンドを絞り込み
+- フォルダ情報はPC内（IndexedDB）に保存
 
-### Easy install
+## 使い方
 
-Open PowerShell and run:
+1. Discordのフレンド一覧で相手を右クリック
+2. **フォルダに追加** を選択
+3. 既存フォルダを選ぶか、新しいフォルダを作成
+4. フレンド画面上部の **フォルダ** タブから表示
 
-```powershell
-irm https://raw.githubusercontent.com/nekoshinajun/FriendFolders/main/install.ps1 | iex
-```
+## 注意事項
 
-Follow the prompts. The script prepares Git, Node.js, pnpm, the Vencord source tree, FriendFolders, and builds Vencord.
+FriendFoldersはDiscord公式機能ではなく、Vencord用の非公式プラグインです。Vencordなどのクライアント改造はDiscordの利用規約に抵触する可能性があります。利用はご自身の判断でお願いします。
 
-When Vencord asks for a target, choose **Stable**. Restart Discord, then enable **FriendFolders** in Settings → Vencord → Plugins.
+Windows Smart App Controlを無効にする必要はありません。現在、未署名EXE版インストーラーは一般配布していません。
 
-### Manual install
+## 手動インストール（上級者向け）
 
 ```powershell
 winget install OpenJS.NodeJS.LTS
@@ -42,17 +69,10 @@ pnpm build
 pnpm inject
 ```
 
-## Updating
+## English
 
-Run the Easy install command again. It updates the source and rebuilds Vencord.
+English instructions: [README.en.md](README.en.md)
 
-## Notes
+## ライセンス
 
-- Vencord custom plugins require building Vencord from source.
-- Client mods are not an official Discord feature; use them at your own discretion.
-- Disabling Smart App Control is not recommended.
-- A GUI installer may return later if a trusted code-signing path is available.
-
-## License
-
-GPL-3.0-or-later.
+GPL-3.0-or-later
