@@ -1,57 +1,58 @@
 # FriendFolders
 
-A [Vencord](https://vencord.dev) userplugin that lets you organize your Discord friends into custom folders.
-
-[日本語版はこちら](README.ja.md)
+A [Vencord](https://vencord.dev) userplugin for organizing Discord friends into custom folders.
 
 ## Features
 
-- Adds a **Folders** tab to the Friends page. Click it to switch folders, create, rename, or delete them.
-- Right-click a friend → **Add to Folder**. A friend can belong to multiple folders.
-- Folder data is saved locally (IndexedDB) per Discord account and survives restarts.
-- Never touches your actual Discord friends, and sends no data anywhere.
-- UI follows your Discord language (Japanese / English).
+- Adds a folder tab to the Friends page
+- Add friends to folders from the user context menu
+- A friend can belong to multiple folders
+- Data stays local in IndexedDB
+- Does not modify Discord relationships or transmit folder data externally
 
-## Installation
+## Install (Windows)
 
-This is a userplugin, so you need to build Vencord from source.
-See the [official guide](https://docs.vencord.dev/installing/) for details.
+> **A public EXE installer is not currently distributed.**
+> Unsigned executables can be blocked by Windows Smart App Control. You do not need to disable Smart App Control.
 
-1. Install [Node.js](https://nodejs.org) (LTS) and [Git](https://git-scm.com), then run `npm install -g pnpm`
-2. Clone and set up Vencord:
-   ```sh
-   git clone https://github.com/Vendicated/Vencord
-   cd Vencord
-   pnpm install
-   ```
-3. Clone this plugin into `src/userplugins`:
-   ```sh
-   git clone https://github.com/nekoshinajun/FriendFolders src/userplugins/FriendFolders
-   ```
-4. Build and inject:
-   ```sh
-   pnpm build
-   pnpm inject
-   ```
-5. Restart Discord, open **Settings → Vencord → Plugins**, enable **FriendFolders**, and restart again.
+### Easy install
+
+Open PowerShell and run:
+
+```powershell
+irm https://raw.githubusercontent.com/nekoshinajun/FriendFolders/main/install.ps1 | iex
+```
+
+Follow the prompts. The script prepares Git, Node.js, pnpm, the Vencord source tree, FriendFolders, and builds Vencord.
+
+When Vencord asks for a target, choose **Stable**. Restart Discord, then enable **FriendFolders** in Settings → Vencord → Plugins.
+
+### Manual install
+
+```powershell
+winget install OpenJS.NodeJS.LTS
+winget install Git.Git
+npm install -g pnpm
+cd $HOME
+git clone https://github.com/Vendicated/Vencord
+cd Vencord
+pnpm install
+git clone https://github.com/nekoshinajun/FriendFolders src/userplugins/friendFolders
+pnpm build
+pnpm inject
+```
 
 ## Updating
 
-```sh
-cd Vencord/src/userplugins/FriendFolders
-git pull
-cd ../../..
-pnpm build
-```
+Run the Easy install command again. It updates the source and rebuilds Vencord.
 
-Then restart Discord.
+## Notes
 
-## Known limitations
-
-- The folder view shows online and offline friends together.
-- Folder assignments of removed friends are kept, and come back if you re-add them.
-- Discord updates may break the patches. If the tab disappears, please open an issue.
+- Vencord custom plugins require building Vencord from source.
+- Client mods are not an official Discord feature; use them at your own discretion.
+- Disabling Smart App Control is not recommended.
+- A GUI installer may return later if a trusted code-signing path is available.
 
 ## License
 
-GPL-3.0-or-later, same as Vencord.
+GPL-3.0-or-later.
