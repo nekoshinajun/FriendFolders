@@ -46,7 +46,14 @@ try {
 
     $plugins = Join-Path $vencord "src\userplugins"
     New-Item -ItemType Directory -Force -Path $plugins | Out-Null
-    $plugin = Join-Path $plugins "FriendFolders"
+    $plugin = Join-Path $plugins "friendFolders"
+    $legacyPlugin = Join-Path $plugins "FriendFolders"
+
+    # Remove the old pre-release folder name so only one copy is loaded.
+    if ((Test-Path $legacyPlugin) -and ($legacyPlugin -ne $plugin)) {
+        Step "Removing old FriendFolders folder"
+        Remove-Item $legacyPlugin -Recurse -Force
+    }
 
     if (Test-Path (Join-Path $plugin ".git")) {
         Step "Updating FriendFolders"
