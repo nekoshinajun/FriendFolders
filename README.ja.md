@@ -4,83 +4,58 @@ Discordのフレンドを、自分で作ったフォルダに分類できる [Ve
 
 ## できること
 
-- フレンド画面に「フォルダ」タブが追加されます。クリックでフォルダの切り替え・追加・名前変更・削除ができます。
-- フレンドを右クリック →「フォルダに追加」。1人を複数のフォルダに入れられます。
-- 分類はこのPC内(IndexedDB)にアカウントごとに保存され、再起動しても残ります。
-- Discordのフレンド関係は一切変更せず、外部へのデータ送信もしません。
+- フレンド画面に「フォルダ」タブを追加
+- フレンドを右クリックしてフォルダへ追加
+- 1人を複数フォルダへ登録可能
+- データはこのPC内（IndexedDB）だけに保存
+- Discordのフレンド関係を変更せず、外部送信もしません
 
-## インストール(Windows)
+## インストール（Windows）
 
-Vencordをソースからビルドする必要があります。コマンドはPowerShellに1行ずつ貼り付けてください。
+> **現在、一般配布用EXEは提供していません。**
+> 未署名EXEがWindows Smart App Controlにブロックされる環境があるためです。Smart App Controlを無効にする必要はありません。
 
-**1. 必要なソフトを入れる(初回のみ)**
+### かんたん手順
+
+1. PowerShellを開く
+2. 下の1行をコピーして貼り付け、Enter
+
+```powershell
+irm https://raw.githubusercontent.com/nekoshinajun/FriendFolders/main/install.ps1 | iex
+```
+
+あとは画面の案内に従ってください。必要なGit / Node.js / pnpm、Vencordソース、FriendFoldersの取得とビルドを自動で行います。
+
+Vencordの選択画面が出たら **Stable** を選んでEnterしてください。完了後、Discordを完全終了して起動し、**ユーザー設定 → Vencord → Plugins → FriendFolders** をONにしてください。
+
+### 手動で入れたい場合
+
+Vencordをソースからビルドする必要があります。
 
 ```powershell
 winget install OpenJS.NodeJS.LTS
 winget install Git.Git
-```
-
-PowerShellを一度閉じて開き直してから:
-
-```powershell
 npm install -g pnpm
-```
-
-**2. Vencordを取得**
-
-```powershell
 cd $HOME
 git clone https://github.com/Vendicated/Vencord
 cd Vencord
 pnpm install
-```
-
-**3. このプラグインを取得**
-
-```powershell
-git clone https://github.com/nekoshinajun/FriendFolders src/userplugins/FriendFolders
-```
-
-**4. ビルドしてDiscordに組み込む**
-
-```powershell
+git clone https://github.com/nekoshinajun/FriendFolders src/userplugins/friendFolders
 pnpm build
 pnpm inject
 ```
 
-選択画面が出たら「Stable」を選んでEnter。`Success!` と出れば完了です。
+## 更新
 
-**5. 有効化**
-
-Discordを完全に終了(タスクトレイから終了)→ 起動 → ユーザー設定 → Vencord欄の「Plugins」→「FriendFolders」をON → 再起動
-
-## よくあるつまずき
-
-- **`Command "build" not found` と出る**  
-  Vencordフォルダの外で実行しています。先に `cd $HOME\Vencord` を実行してください。左側が `...\Vencord>` になっていればOKです。
-
-- **pnpmのバージョンについて黄色いWARNが出る**  
-  無視して大丈夫です。
-
-- **Discordのアップデート後にVencordが外れた**  
-  `cd $HOME\Vencord` → `pnpm inject` をやり直してください。
-
-## 更新方法
-
-```powershell
-cd $HOME\Vencord\src\userplugins\FriendFolders
-git pull
-cd $HOME\Vencord
-pnpm build
-```
-
-その後Discordを再起動してください。
+同じ「かんたん手順」の1行をもう一度実行すれば、FriendFoldersとVencordを更新して再ビルドします。
 
 ## 注意
 
-- Vencordなどのクライアント改造はDiscordの利用規約上グレーな行為です。自己責任でご利用ください。
-- この方法で入れたVencordは、アプリ内の自動更新が効きません。
+- Vencordのcustom pluginはVencordをソースからビルドする必要があります。
+- Vencordなどのクライアント改造はDiscordの公式機能ではありません。自己責任で利用してください。
+- Smart App Controlを無効にすることは推奨していません。
+- 将来、信頼されたコード署名を導入できた場合はGUIインストーラーの一般配布を検討します。
 
 ## ライセンス
 
-GPL-3.0-or-later(Vencordと同じ)
+GPL-3.0-or-later（Vencordと同じ）
