@@ -26,7 +26,7 @@ See the [official guide](https://docs.vencord.dev/installing/) for details.
    ```
 3. Clone this plugin into `src/userplugins`:
    ```sh
-   git clone https://github.com/<your-name>/FriendFolders src/userplugins/FriendFolders
+   git clone https://github.com/nekoshinajun/FriendFolders src/userplugins/FriendFolders
    ```
 4. Build and inject:
    ```sh
